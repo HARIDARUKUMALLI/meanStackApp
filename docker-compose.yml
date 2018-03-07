@@ -1,0 +1,59 @@
+# 1. Update config values (localhost --> mongo and localhost --> redis) in config.development.json
+# 2. Set APP_ENV environment variable to proper value in Dockerfile-redis (default is "development")
+#    export APP_ENV=development
+#    export DOCKER_ACCT=<yourHubUserName>
+# 3. Run docker-compose build
+# 4. Run docker-compose up -d
+# 5. Live long and prosper
+
+version: '2' # specify docker-compose version
+
+# Define the services/containers to be run
+services:
+  angular: # name of the first service
+    container_name: angular
+    build: ./angular-client # specify the directory of the Dockerfile
+    #build:
+      #context: .
+      #dockerfile: dockerfile.dev
+    ports:
+      - "4200:4200" # specify port forewarding
+    volumes:
+      - /c/Users/prash/Documents/www/myNgFirebase:/usr/src/myNgFirebase:rw
+      #- .:/usr/src/myNgFirebase:rw # this is working to load data
+      #- www
+    working_dir: /usr/src/myNgFirebase
+    networks:
+      - meanstack-network
+
+  express: #name of the second service
+    container_name: express
+    build: ./express-server # specify the directory of the Dockerfile
+    ports:
+      #- "3000:3000" #specify ports forewarding
+      - "8080:8080" #specify ports forewarding
+    volumes:
+      - /c/Users/prash/Documents/www/myNodeRest:/usr/src/myNodeRest:rw # this is working to load data
+      #- .:/usr/src/myNodeRest:rw # this is working to load data
+      #- www
+    working_dir: /usr/src/myNodeRest
+    command: bash -c "npm install && npm start"
+    networks:
+      - meanstack-network
+
+  # mongodb: # name of the third service
+  #   container_name: mongodb
+  #   image: mongo # specify image to build container from
+  #   ports:
+  #     - "27017:27017" # specify port forewarding
+  #   networks:
+  #     - meanstack-network
+
+networks:
+  meanstack-network:
+    driver: bridge
+
+#volumes:
+  #./www:/c/Users/prash/Documents/myNodeRest #If you just want to use the path "data" you have to specify all address of it. Here's an exemple: ./data:cjworkbench:rw/
+  # www: #If you just want to use the path "data" you have to specify all address of it. Here's an exemple: ./data:cjworkbench:rw/
+  #driver: local

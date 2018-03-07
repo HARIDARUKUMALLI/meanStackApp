@@ -1,0 +1,82 @@
+# Build:
+# docker build -t payalcsureja/mean:dev .
+#
+# Run:
+# docker run -it payalcsureja/mean:dev
+#
+# Compose:
+# docker-compose build
+# docker-compose up -d
+
+
+# Build:
+# docker build -t payalcsureja/mean:prod -f Dockerfile-production .
+#
+# Run:
+# docker run -it payalcsureja/mean:prod
+#
+# Compose:
+# docker-compose -f docker-compose-production.yml up -d
+
+# Create image based on the official Node 6 image from dockerhub
+FROM node:latest
+
+# Set metadata for an image
+LABEL Description="Dockerfile for MEAN stack express server"
+LABEL Version="0.0.1"
+LABEL Author="Payal Sureja <payalcsureja@gmail.com>"
+
+# Install Prerequisites
+#RUN npm install --quiet -g  bower pm2 nodemon node-inspector grunt-cli && npm cache clean
+#RUN npm install --quiet -g nodemon && npm cache clean
+
+# ENV
+ENV NODE_ENV=development
+#ENV PORT=3000
+
+# Create a directory where our app will be placed
+#RUN mkdir -p /var/www/mean
+
+# Change directory so that our commands run inside this new directory
+# WORKDIR /var/www/mean/express-server
+
+# Mount host volume to image to keep code outside of docker images
+# VOLUME ["/c/Users/prash/Documents/www/myNodeRest"]
+
+
+# Get all the code needed to run the app
+#COPY . /var/www/mean
+# Copy dependency definitions
+#COPY package.json /var/www/mean
+
+# Install dependecies
+#ADD package.json /var/www/mean/package.json
+#RUN npm install --quiet
+# RUN npm install && RUN npm cache clean
+
+#VOLUME ["/var/www"]
+#EXPOSE $PORT
+#ENTRYPOINT ["npm", "start"]
+
+# Expose the port the app runs in
+
+# Ports generic 80 = HTTP, 443 = HTTPS
+#EXPOSE 80:80
+#EXPOSE 443:443
+# Port 4200 for angular-client
+#EXPOSE 4200:4200
+
+# Port 3000 for node-express server
+# EXPOSE 3000:3000
+
+# Port 5858 for node debug
+# EXPOSE 5858:5858
+
+# Port 8080 for node-inspector
+# EXPOSE 8080:8080
+
+# Port 35729 for livereload
+# EXPOSE 35729:35729
+
+# Serve the app
+# CMD ["npm", "start"]
