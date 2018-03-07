@@ -45,8 +45,13 @@ services:
       - meanstack-network
 
   # mongodb: # name of the third service
+  #   restart: always
   #   container_name: mongodb
   #   image: mongo # specify image to build container from
+  #   volumes:
+  #     - /c/Users/prash/Documents/www/mongodata:/usr/src/mongodata:rw
+  #     - /c/Users/prash/Documents/www/mongodata/mongod.docker.conf:/c/Users/prash/Documents/www/mongodata/mongod.docker.conf       
+  #   command: ["mongod", "-f", "/c/Users/prash/Documents/www/mongodata/mongod.docker.conf"]
   #   ports:
   #     - "27017:27017" # specify port forewarding
   #   networks:
