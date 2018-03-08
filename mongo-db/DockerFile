@@ -1,0 +1,14 @@
+# # Create image based on the official mongodb image from dockerhub
+# FROM mongo:latest
+
+# # Set metadata for an image
+# LABEL Description="Dockerfile for MEAN stack mongo db"
+# LABEL Version="0.0.1"
+# LABEL Author="Payal Sureja <payalcsureja@gmail.com>"
+
+
+# RUN mkdir -p /usr/src/mongodata \
+#     && chown -R mongodb:mongodb /usr/src/mongodata
+# VOLUME /usr/src/mongodata
+
+# CMD ["mongod", "--logpath", "/usr/src/mongodata/mongo.logs"]
